@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1b5b50">
+  <meta name="description" content="Das Leselabor: eine spielerische Lernreise durch drei Sachtexte über Waldtiere. Für die 3. Schulstufe.">
+  <title>Das Leselabor | Die drei Geheimnisse des Waldes</title>
+  <style>
+    :root{--forest:#174e43;--deep:#133b36;--leaf:#2f8b6c;--mint:#e3f5e9;--paper:#fffdf6;--cream:#fbf5e6;--ink:#244239;--muted:#64786e;--gold:#ffd779;--coral:#eb8664;--line:#d8e4d4;--shadow:0 14px 35px rgba(28,75,58,.11);--radius:24px}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 8% 3%,#fff9d8 0,transparent 27%),radial-gradient(circle at 92% 25%,#e5f6dc 0,transparent 32%),var(--cream);color:var(--ink);font:17px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+    button,select{font:inherit}
+    button{cursor:pointer}
+    button:disabled{cursor:not-allowed;opacity:.52}
+    :focus-visible{outline:4px solid #e39e31;outline-offset:4px}
+    .skip{position:absolute;top:-100px;left:15px;z-index:100;background:#fff;padding:10px 16px;border-radius:8px}.skip:focus{top:12px}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+    .topbar{background:rgba(255,253,246,.93);border-bottom:1px solid #e8e9d7;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+    .topbar-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.045em;font-size:22px;color:var(--deep)}
+    .brand-emblem{display:grid;place-items:center;background:#daedce;border-radius:15px;width:45px;height:45px;font-size:26px;transform:rotate(-5deg)}
+    .headright{display:flex;align-items:center;gap:11px;flex-wrap:wrap;justify-content:flex-end}
+    .progress-mini{font-size:14px;color:var(--deep);font-weight:800;background:#eaf4e7;padding:9px 12px;border-radius:100px;white-space:nowrap}
+    .quiet-btn{background:#fff;border:1px solid #d1e0d4;border-radius:999px;padding:8px 15px;color:var(--deep);font-weight:800;font-size:14px}
+    .quiet-btn:hover{background:#edf7ed}
+    main{padding-top:30px;padding-bottom:32px}
+    .hero{border-radius:32px;position:relative;overflow:hidden;min-height:455px;background:linear-gradient(130deg,#1b6a5c,#277b65 52%,#53885a);color:white;box-shadow:var(--shadow);display:grid;grid-template-columns:1.05fr .95fr}
+    .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 20%,rgba(255,255,210,.1),transparent 30%),radial-gradient(circle at 78% 30%,rgba(255,221,106,.13),transparent 35%)}
+    .hero-copy{padding:50px 32px 47px 51px;position:relative;z-index:2}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:#f5de93;background:rgba(17,56,46,.3);padding:7px 13px;border-radius:30px}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{line-height:1.14;letter-spacing:-.045em}
+    h1{font-size:clamp(35px,4.6vw,60px);margin:20px 0 18px;max-width:600px}
+    h2{font-size:clamp(27px,3vw,36px);margin-bottom:12px}
+    h3{font-size:23px;margin-bottom:9px}
+    .hero-copy p{font-size:19px;max-width:560px;color:#e9f6e8}
+    .hero-scene{min-height:420px;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+    .forest-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .owl-frame{position:relative;z-index:2;width:min(290px,72%);filter:drop-shadow(0 22px 10px rgba(4,33,22,.19));margin-bottom:45px;animation:bob 4s ease-in-out infinite}
+    .speech{position:absolute;z-index:3;top:42px;right:22px;max-width:168px;background:#fffdf4;color:var(--forest);font-weight:900;font-size:16px;padding:13px 17px;border-radius:19px 19px 19px 5px;transform:rotate(5deg);box-shadow:0 7px 0 rgba(11,48,34,.13)}
+    @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;min-height:54px;border-radius:16px;font-weight:900;border:2px solid transparent;box-shadow:0 5px 0 rgba(10,48,35,.17);transition:transform .12s,box-shadow .12s;background:var(--gold);color:#244235;text-align:center}
+    .btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 0 rgba(10,48,35,.17)}.btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 rgba(10,48,35,.17)}
+    .btn.secondary{background:white;color:var(--forest);border-color:#dbe9d7;box-shadow:none}
+    .btn.primary-green{background:var(--forest);color:white;box-shadow:0 4px 0 #103e35}
+    .btn.small{min-height:43px;padding:9px 15px;font-size:15px;border-radius:12px}
+    .btn:disabled{box-shadow:none}
+    .section{margin-top:35px}.centered{text-align:center}.section-intro{color:var(--muted);max-width:680px;margin:0 auto 22px}
+    .three-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .feature{background:#fffefa;border:1px solid #e1e6d7;border-radius:var(--radius);padding:22px;box-shadow:0 4px 0 rgba(62,101,54,.035)}
+    .feature-icon{font-size:34px;display:block;margin-bottom:11px}
+    .feature strong{display:block;color:var(--deep);font-size:18px;margin-bottom:5px}.feature p{color:var(--muted);font-size:15px;margin-bottom:0}
+    .tiny-note{color:var(--muted);font-size:13px;text-align:center;margin-top:32px}
+    .map-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:13px 0 26px;flex-wrap:wrap}
+    .kicker{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#378264;margin-bottom:7px}
+    .map-sub{color:var(--muted);margin-bottom:0;max-width:610px}
+    .owl-small{width:100px;filter:drop-shadow(0 6px 0 #dce7cb)}
+    .map-line{height:8px;border-radius:50px;background:#deebdd;overflow:hidden;margin:4px 0 23px}.map-line-fill{height:100%;border-radius:50px;background:#67b88a;transition:width .2s}
+    .station-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
+    .station-card{background:white;border:2px solid #dde6d3;border-radius:27px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .station-card.locked{opacity:.75;background:#f4f5ec}
+    .station-card.done{border-color:#9fd8b4}
+    .card-art{height:166px;display:grid;place-items:center;position:relative;overflow:hidden}
+    .card-art::before,.card-art::after{content:"";position:absolute;border-radius:50%;background:#ffffff50}.card-art::before{height:180px;width:180px;top:-90px;left:-50px}.card-art::after{height:160px;width:160px;right:-60px;bottom:-95px}
+    .art-igel{background:linear-gradient(130deg,#d2ecb2,#f7df9a)}.art-squirrel{background:linear-gradient(130deg,#ffe2aa,#f5bea0)}.art-fox{background:linear-gradient(130deg,#c9e5ec,#b6dfc0)}
+    .card-emoji{font-size:92px;filter:drop-shadow(0 8px 1px #00000013);position:relative;z-index:1}
+    .card-state{position:absolute;right:15px;top:14px;border-radius:99px;background:#fffef5;color:#365c45;font-size:13px;font-weight:900;padding:6px 12px;z-index:2}
+    .card-copy{padding:22px;flex:1;display:flex;flex-direction:column;align-items:flex-start}
+    .card-copy .category{color:#4f8f6a;font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+    .card-copy h3{margin-bottom:9px}.card-copy p{font-size:15px;color:var(--muted);flex:1}
+    .card-copy .btn{width:100%}
+    .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.badge-pill{border-radius:99px;background:#eef3e7;border:1px solid #dbe9db;padding:9px 13px;color:#456253;font-size:15px;font-weight:800}
+    .badge-pill.earned{background:#fff2ca;border-color:#f0d68e;color:#745321}
+    .playbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:19px}
+    .crumb{font-size:15px;font-weight:900;color:var(--leaf)}
+    .playhead{background:var(--deep);color:white;border-radius:25px;padding:24px 27px;margin-bottom:19px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+    .playhead .kicker{color:#b5e9b7}.playhead h2{margin-bottom:3px}.playhead p{color:#d1ecdf;margin:0;font-size:15px}
+    .playhead-animal{font-size:70px;line-height:1}
+    .play-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+    .paper,.question-card{border-radius:25px;border:1px solid #e1e7d8;background:var(--paper);box-shadow:var(--shadow);padding:28px}
+    .paper{background:linear-gradient(130deg,#fffcf1,#fffef9);border-color:#eadfc4}
+    .paper-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px dashed #dfdbc9;padding-bottom:14px;margin-bottom:19px}
+    .paper-top strong{font-size:18px;color:#6b613c}.paper-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:#9c814e}
+    .reading-text{font-size:19px;line-height:1.95;color:#283f39}
+    .reading-text p{margin-bottom:16px}
+    .reading-text p:last-child{margin-bottom:0}
+    .reading-text .mark-sentence{display:inline;border:0;background:none;color:inherit;text-align:left;border-radius:6px;padding:3px 2px;line-height:inherit;box-shadow:inset 0 -3px #efc37f;cursor:pointer;text-decoration:none}
+    .reading-text .mark-sentence:hover{background:#fff1b4}
+    .reading-text .mark-sentence[aria-pressed="true"]{background:#ffda7f;box-shadow:0 0 0 2px #eaa64d}
+    .mark-note{background:#f7eecf;color:#776136;padding:9px 13px;border-radius:12px;font-size:14px;font-weight:800;margin-bottom:17px}
+    .tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}.tab{background:#f5f4e8;color:#45695a;padding:9px 11px;border:1px solid #d8daca;border-radius:11px;font-weight:850;font-size:14px}.tab[aria-selected="true"]{background:var(--forest);color:#fff}
+    .qcount{font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:12px;color:#56856c;margin-bottom:13px}
+    .question-title{font-size:25px;line-height:1.24;font-weight:900;letter-spacing:-.03em;color:var(--deep);margin-bottom:12px}
+    .question-context{background:#e6f4e6;border-left:4px solid #63a67a;border-radius:0 12px 12px 0;padding:13px 15px;font-size:16px;margin-bottom:16px;color:#244d3e}
+    .question-help{font-size:16px;color:var(--muted);margin-bottom:15px}
+    .option-list{display:grid;gap:10px;margin:18px 0}.option{display:flex;align-items:center;gap:13px;min-height:62px;padding:13px 14px;border:2px solid #dce8d7;border-radius:14px;text-align:left;background:#fff;color:#264237;font-weight:750;width:100%;box-shadow:0 3px 0 #e9efe4}
+    .option:hover{background:#f2f9ed}.option[aria-pressed="true"]{border-color:#3a9970;background:#ddf2e4;box-shadow:0 3px 0 #a7d4b6}
+    .option-indicator{display:grid;place-items:center;flex-shrink:0;width:29px;height:29px;border:2px solid #b4cbba;border-radius:9px;color:#2b654b;font-size:15px;font-weight:900}
+    .option[aria-pressed="true"] .option-indicator{background:#338765;color:white;border-color:#338765}
+    .question-note{color:#65796d;font-size:14px;margin-top:0}
+    .answer-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+    .answer-actions .btn{flex:1;min-width:160px}
+    .hints{border-top:1px solid #e2e9df;margin-top:24px;padding-top:18px}
+    .hints-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:13px}.hints-head strong{font-size:17px}.hints-head span{font-size:13px;color:var(--muted)}
+    .hint{background:#fff6da;border:1px solid #f0dfa4;padding:12px 14px;border-radius:12px;margin-bottom:9px;color:#614f27;font-size:15px}
+    .feedback{padding:16px;border-radius:14px;margin:18px 0 0;border:2px solid #e6c78c;background:#fff6d9;color:#624b2b}
+    .feedback.success{border-color:#9ed2a8;background:#e1f5df;color:#20573d}.feedback strong{display:block;margin-bottom:5px}
+    .matching{display:grid;gap:14px;margin:20px 0}
+    .match{background:#fff;border:1px solid #dce8d7;border-radius:14px;padding:14px}
+    .match label{display:block;font-weight:850;font-size:15px;margin-bottom:10px}
+    .match select{width:100%;border:2px solid #aacdbc;background:#f7fcf7;border-radius:10px;min-height:48px;padding:7px 10px;color:var(--deep)}
+    .station-finished{background:#fffdf4;border:2px solid #d9ebd1;border-radius:25px;padding:34px;text-align:center;box-shadow:var(--shadow)}
+    .finished-emoji{font-size:78px;display:block;line-height:1.2;margin-bottom:10px}
+    .finished-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .certificate-hero{background:linear-gradient(140deg,#235d51,#437e5d);color:white;border-radius:28px;padding:36px 27px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden}
+    .certificate-hero::before{content:"✧ ✦ ✧ ✦ ✧";font-size:36px;position:absolute;top:5px;left:0;right:0;letter-spacing:24px;color:#ffffff29}
+    .certificate-hero h1{font-size:43px;margin:15px 0 10px}.certificate-hero p{color:#e0f3df;margin-bottom:0}
+    .certificate{max-width:740px;margin:0 auto;background:#fffdfa;border:12px double #d9bb6b;border-radius:18px;box-shadow:var(--shadow);padding:37px 31px;text-align:center;position:relative}
+    .certificate .icon{font-size:70px}.certificate h2{font-family:Georgia,serif;color:#356149;font-size:43px;margin:9px 0 5px}.certificate .subtitle{font-family:Georgia,serif;color:#846f3a;font-size:23px}
+    .certificate p{max-width:520px;margin:16px auto;font-size:18px}.certificate-medals{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}.certificate-medals span{font-size:15px;font-weight:850;background:#fff0c2;border-radius:99px;padding:8px 12px}
+    .certificate-small{font-size:14px;color:#806b49}.final-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .teacher{margin-top:34px;background:#fffdf5;border:1px solid #e3e9da;padding:15px 19px;border-radius:17px;color:#486255;font-size:14px}
+    .teacher summary{cursor:pointer;font-weight:900}.teacher a{color:var(--forest)}
+    footer{padding:20px 0 36px;text-align:center;color:#6f8171;font-size:13px}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:870px){.hero{grid-template-columns:1fr}.hero-copy{padding:36px 28px 10px}.hero-scene{min-height:240px}.owl-frame{width:170px;margin-bottom:20px}.speech{top:6px;right:15%;font-size:14px}.station-grid{grid-template-columns:1fr}.station-card{display:grid;grid-template-columns:180px 1fr}.card-art{height:100%;min-height:207px}.play-grid{grid-template-columns:1fr}.three-grid{grid-template-columns:1fr}.reading-text{font-size:19px}}
+    @media(max-width:570px){body{font-size:16px}.wrap{padding:0 13px}.topbar-inner{min-height:68px}.brand{font-size:18px}.brand-emblem{width:37px;height:37px;font-size:22px}.progress-mini{font-size:12px;padding:7px 9px}.quiet-btn{padding:7px 10px;font-size:13px}.headright{gap:5px}main{padding-top:14px}.hero{border-radius:22px}.hero-copy{padding:27px 22px 10px}.hero-copy p{font-size:17px}.hero-scene{min-height:215px}.speech{right:9%;font-size:12px;padding:9px}.section{margin-top:25px}.station-card{display:flex}.card-art{height:145px;min-height:unset}.card-emoji{font-size:75px}.paper,.question-card{padding:20px 18px;border-radius:19px}.reading-text{font-size:18px;line-height:1.85}.playhead{padding:20px 18px}.playhead-animal{font-size:50px}.question-title{font-size:23px}.btn{width:100%}.playbar .btn{width:auto}.finished-actions .btn,.final-actions .btn{width:100%}.certificate{padding:24px 14px;border-width:8px}.certificate h2{font-size:35px}.certificate .subtitle{font-size:19px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+    @media print{body{background:white;color:#222}.topbar,footer,.final-actions,.certificate-hero,.teacher,.tiny-note{display:none!important}.wrap,main{max-width:none!important;padding:0!important;margin:0!important}.certificate{box-shadow:none;max-width:none;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;border:10px double #ad9050;break-inside:avoid}.certificate p{color:#222}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#hauptinhalt">Direkt zum Inhalt</a>
+<header class="topbar"><div class="wrap topbar-inner">
+  <div class="brand"><span class="brand-emblem" aria-hidden="true">🌿</span><span>Das Leselabor</span></div>
+  <div class="headright"><span class="progress-mini" id="header-progress" aria-label="Spielfortschritt">0 von 9 Aufgaben</span><button class="quiet-btn" id="home-button" type="button" data-action="home">⌂ Startseite</button></div>
+</div></header>
+<main id="hauptinhalt" class="wrap" tabindex="-1"><div id="app"></div></main>
+<footer class="wrap">Ein Lernspiel für die 3. Schulstufe · Ohne Anmeldung und Werbung · Lesen macht neugierig 🌱</footer>
+<div class="sr-only" id="announcer" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+const REPORTS = {
+  igel:{name:"Igel",emoji:"🦔",title:"Der Igel",paragraphs:[
+    [{id:"i1",text:"Der Igel lebt in Gärten, Parks und an Waldrändern."}],
+    [{id:"i2",text:"Tagsüber versteckt er sich oft unter Sträuchern oder in dichtem Laub."},{id:"i3",text:"Wenn es dämmert, beginnt seine Nahrungssuche."},{id:"i4",text:"Dabei frisst er vor allem Käfer, Larven und andere kleine Tiere wie Regenwürmer."}],
+    [{id:"i5",text:"Seine vielen Stacheln schützen ihn vor Feinden."}],
+    [{id:"i6",text:"Im Herbst frisst er sich Fettreserven an."},{id:"i7",text:"Wenn es kalt wird und wenig Nahrung gibt, hält er Winterschlaf."},{id:"i8",text:"Dafür sucht er sich ein geschütztes Versteck, zum Beispiel unter einem Laub- oder Asthaufen."}]
+  ]},
+  squirrel:{name:"Eichhörnchen",emoji:"🐿️",title:"Das Eichhörnchen",paragraphs:[
+    [{id:"e1",text:"Das Eichhörnchen lebt in Wäldern, Gärten und Parks."},{id:"e2",text:"Es bewegt sich meistens am Tag."}],
+    [{id:"e3",text:"Hoch oben im Baum baut es ein rundes Nest aus Zweigen, Blättern und Moos."},{id:"e4",text:"Dieses Nest heißt Kobel."}],
+    [{id:"e5",text:"Im Herbst versteckt es Nüsse und Samen an verschiedenen Stellen im Boden."}],
+    [{id:"e6",text:"Im Winter hält es Winterruhe, aber keinen Winterschlaf."},{id:"e7",text:"Es wird immer wieder wach und sucht dann seine Vorräte."}],
+    [{id:"e8",text:"Nicht jedes Versteck findet es wieder."},{id:"e9",text:"Aus manchen vergessenen Samen können im Frühling neue Bäume wachsen."}]
+  ]},
+  fox:{name:"Fuchs",emoji:"🦊",title:"Der Rotfuchs",paragraphs:[
+    [{id:"f1",text:"Der Rotfuchs lebt in Wäldern, auf Wiesen und manchmal auch in Städten."}],
+    [{id:"f2",text:"Er hat ein rötlich braunes Fell und einen buschigen Schwanz."},{id:"f3",text:"Besonders in der Dämmerung und in der Nacht sucht er nach Nahrung."}],
+    [{id:"f4",text:"Er frisst zum Beispiel Mäuse, aber auch Beeren."},{id:"f5",text:"Mit seinen guten Ohren kann er selbst leise Geräusche wahrnehmen."}],
+    [{id:"f6",text:"Einen Fuchsbau nutzt er besonders dann, wenn er Junge aufzieht."}],
+    [{id:"f7",text:"Im Winter bleibt der Fuchs aktiv und sucht weiterhin nach Futter."}]
+  ]}
+};
+const STATIONS = [
+ {id:"igel",number:1,title:"Der geheimnisvolle Igel",subtitle:"Finde wichtige Informationen im Text.",badge:"🔎 Igel-Lupe",description:"Finde heraus, wann der Igel unterwegs ist, was er frisst und wo er schläft.",questions:[
+  {id:"q1",kind:"single",title:"Wann beginnt der Igel seine Nahrungssuche?",options:[["a","Am frühen Morgen"],["b","In der Dämmerung"],["c","Nur am Mittag"]],correct:["b"],hints:["Suche die Stelle, an der etwas über die Nahrungssuche steht.","Lies den zweiten Absatz noch einmal genau.","Suche nach dem Satz, der mit „Wenn es dämmert“ beginnt."],success:"Richtig! Du hast die Zeitangabe gefunden. Dämmerung ist die Zeit zwischen Tag und Nacht."},
+  {id:"q2",kind:"multi",title:"Welche zwei Tiere werden im Text als Nahrung des Igels genannt?",options:[["a","Käfer"],["b","Fische"],["c","Regenwürmer"],["d","Schmetterlinge"]],correct:["a","c"],hints:["Suche im Text nach dem Wort „frisst“.","Im zweiten Absatz werden mehrere kleine Tiere genannt.","Achte besonders auf die Wörter nach „Dabei frisst er“."],success:"Super! Du hast zwei richtige Informationen aus dem Sachtext gefunden."},
+  {id:"q3",kind:"single",title:"Welches Versteck wird für den Winterschlaf genannt?",options:[["a","Ein Nest hoch oben im Baum"],["b","Ein Laub- oder Asthaufen"],["c","Ein Teich"]],correct:["b"],hints:["Die Antwort findest du am Ende des Textes.","Suche nach dem Wort „Winterschlaf“.","Lies den letzten Satz. Dort steht ein Beispiel für ein Versteck."],success:"Genau! Du hast herausgefunden, wo der Igel seinen Winterschlaf verbringen kann."}
+ ]},
+ {id:"squirrel",number:2,title:"Das verschwundene Nussversteck",subtitle:"Suche Beweise im Forschungsbericht.",badge:"🪶 Beweis-Feder",description:"Lies über das Eichhörnchen und markiere die passenden Beweise direkt im Text.",questions:[
+  {id:"q4",kind:"mark",title:"Finde den Beweis!",context:"Professor Feder behauptet: „Das Eichhörnchen wacht im Winter auf, um Futter zu suchen.“",instruction:"Klicke auf den Satz im Forschungsbericht, der diese Aussage beweist.",correctSentence:"e7",hints:["Suche die Stelle, an der beschrieben wird, was das Eichhörnchen im Winter tut.","Lies den vorletzten Absatz.","Der richtige Satz beginnt mit „Es wird immer wieder wach“."],success:"Gut geforscht! Du hast den passenden Beweis im Text gefunden."},
+  {id:"q5",kind:"mark",title:"Wie entstehen neue Bäume?",context:"Professor Feder fragt: „Was kann aus manchen vergessenen Vorräten werden?“",instruction:"Klicke auf den Satz, der diese Frage beantwortet.",correctSentence:"e9",hints:["Suche nach einer Information über den Frühling.","Lies die letzten beiden Sätze.","Der gesuchte Satz beginnt mit „Aus manchen vergessenen Samen“."],success:"Richtig! Manchmal hilft das Eichhörnchen beim Wachsen neuer Bäume, ohne es zu merken."},
+  {id:"q6",kind:"single",title:"Wie nennt man das Nest eines Eichhörnchens?",options:[["a","Horst"],["b","Kobel"],["c","Fuchsbau"]],correct:["b"],hints:["Der Text beschreibt, wo das Eichhörnchen sein Nest baut.","Suche den Absatz über das Nest.","Die Antwort steht direkt nach der Beschreibung des Nests."],success:"Ausgezeichnet! Ein Kobel ist das Nest eines Eichhörnchens."}
+ ]},
+ {id:"fox",number:3,title:"Die Fuchsspur",subtitle:"Verbinde verschiedene Informationen.",badge:"🧭 Wald-Kompass",description:"Untersuche den Fuchs und löse das große Winterrätsel mit allen drei Texten.",questions:[
+  {id:"q7",kind:"multi",title:"Welche zwei Nahrungsmittel werden beim Fuchs genannt?",options:[["a","Mäuse"],["b","Blätter"],["c","Beeren"],["d","Nüsse"]],correct:["a","c"],hints:["Suche den Teil des Textes, in dem es um das Fressen geht.","Im dritten Absatz wird die Nahrung beschrieben.","Suche nach dem Satz, der mit „Er frisst zum Beispiel“ beginnt."],success:"Richtig! Der Fuchs frisst unterschiedliche Arten von Nahrung."},
+  {id:"q8",kind:"single",title:"Kann ein Fuchs in einem Stadtpark leben?",context:"Ein Kind erzählt: „Gestern habe ich einen Fuchs in einem Stadtpark gesehen!“",options:[["a","Ja, Füchse leben manchmal auch in Städten."],["b","Nein, Füchse können nur im Wald leben."]],correct:["a"],hints:["Überlege, welche Lebensräume im Text genannt werden.","Lies den ersten Satz des Textes.","Achte auf die Formulierung „manchmal auch in Städten“."],success:"Genau! Du hast eine Information aus dem Text auf den Alltag übertragen."},
+  {id:"q9",kind:"matching",title:"Das große Winterrätsel",context:"Für das letzte Rätsel brauchst du alle drei Forschungsberichte. Öffne sie bei Bedarf auf der linken Seite.",descriptions:["Dieses Tier hält Winterschlaf und bleibt im Winter in einem geschützten Versteck.","Dieses Tier hält Winterruhe, wacht zwischendurch auf und sucht versteckte Nahrung.","Dieses Tier bleibt auch im Winter aktiv und sucht weiter nach Futter."],correct:["igel","squirrel","fox"],hints:["Überlege, was die drei Tiere im Winter machen.","Öffne die Forschungsberichte und suche nach dem Wort „Winter“.","Vergleiche die Ausdrücke „Winterschlaf“, „Winterruhe“ und „bleibt aktiv“."],success:"Großartig! Du hast Informationen aus drei Sachtexten richtig miteinander verbunden."}
+ ]}
+];
+const SAVE_KEY="leselabor.session.v1";
+const validQuestionIds=STATIONS.flatMap(s=>s.questions.map(q=>q.id));
+function load(){try{const x=JSON.parse(sessionStorage.getItem(SAVE_KEY)||"null");if(!x||typeof x!=="object")throw Error();return {started:!!x.started,solved:Array.isArray(x.solved)?x.solved.filter(id=>validQuestionIds.includes(id)):[],hints:typeof x.hints==="object"&&x.hints?x.hints:{}};}catch(e){return {started:false,solved:[],hints:{}}}}
+let saved=load(),view=saved.started?"map":"home",currentStation=0,answers=[],markedSentence="",matching=["","",""],feedback=null,activeReport="fox",activeQuestionId=null;
+const app=document.getElementById("app"),progressLabel=document.getElementById("header-progress"),announcer=document.getElementById("announcer");
+function persist(){try{sessionStorage.setItem(SAVE_KEY,JSON.stringify(saved))}catch(e){/* Spiel funktioniert auch ohne Speicherzugriff */}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c])}
+function solvedCount(){return saved.solved.length}
+function stationDone(i){return STATIONS[i].questions.every(q=>saved.solved.includes(q.id))}
+function isUnlocked(i){return i===0||stationDone(i-1)}
+function allDone(){return STATIONS.every((s,i)=>stationDone(i))}
+function showProgress(){progressLabel.textContent=`${solvedCount()} von 9 Aufgaben`}
+function nextQuestion(station){return station.questions.find(q=>!saved.solved.includes(q.id))}
+function shownQuestion(station){return feedback?.ok && activeQuestionId?station.questions.find(q=>q.id===activeQuestionId):nextQuestion(station)}
+function owlSvg(){return `<svg viewBox="0 0 240 245" role="img" aria-label="Professor Feder, eine freundliche Eule mit Brille" xmlns="http://www.w3.org/2000/svg"><ellipse cx="123" cy="221" rx="85" ry="16" fill="#08352e" opacity=".16"/><path d="M65 74 54 18l54 31 26-3 48-30-8 68" fill="#875c42"/><path d="M61 67Q119 23 181 69l17 97Q189 218 124 221Q54 214 43 166Z" fill="#b6784e"/><ellipse cx="126" cy="133" rx="69" ry="72" fill="#efc591"/><path d="M41 132q-32 22 5 64l28-18" fill="#98613e"/><path d="M194 133q31 22-7 63l-28-20" fill="#98613e"/><ellipse cx="94" cy="100" rx="39" ry="43" fill="#f8ebcc"/><ellipse cx="151" cy="100" rx="39" ry="43" fill="#f8ebcc"/><circle cx="95" cy="105" r="11" fill="#233e37"/><circle cx="150" cy="105" r="11" fill="#233e37"/><circle cx="99" cy="100" r="4" fill="#fff"/><circle cx="154" cy="100" r="4" fill="#fff"/><circle cx="94" cy="102" r="31" fill="none" stroke="#24493e" stroke-width="6"/><circle cx="151" cy="102" r="31" fill="none" stroke="#24493e" stroke-width="6"/><path d="M125 99h-5M65 91 43 84M182 91l17-8" stroke="#24493e" stroke-width="6" stroke-linecap="round"/><path d="m121 116 18 10-18 14-14-13Z" fill="#ec9c47"/><path d="M103 159q20 14 39 0" fill="none" stroke="#9a583c" stroke-width="4" stroke-linecap="round"/><path d="M93 210l-8 20m-2-10-12 6m12-6 7 12m56-22 6 20m0-10 13 5m-13-5-9 12" stroke="#d79a48" stroke-width="6" stroke-linecap="round"/><path d="M82 39q43-31 90 1l-3-20-84 1Z" fill="#314f44"/><path d="M70 23h107" stroke="#314f44" stroke-width="10" stroke-linecap="round"/><path d="M165 155l44 10-9 57-48-12Z" fill="#fef3cf" stroke="#365c46" stroke-width="4"/><path d="m176 178 9 8 12-14" fill="none" stroke="#3c9768" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+function forestScene(){return `<svg class="forest-scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 470" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="425" cy="100" r="64" fill="#dff0b5" opacity=".26"/><path d="M0 350Q110 280 236 355T550 335V470H0" fill="#8cc78a" opacity=".45"/><path d="M0 408Q170 322 315 397T550 360V470H0" fill="#226b4c"/><g fill="#195545"><path d="m53 120-69 145H13L-10 310H116l-30-45h31Z"/><path d="m513 88-73 159h32l-34 62h150l-37-62h26Z"/><path d="m408 195-47 103h20l-22 43h98l-25-43h21Z"/></g><g fill="#e1f2b2" opacity=".68"><circle cx="172" cy="96" r="4"/><circle cx="319" cy="59" r="5"/><circle cx="469" cy="207" r="4"/><circle cx="235" cy="249" r="3"/><circle cx="63" cy="56" r="4"/></g><path d="M120 460Q225 389 372 472" fill="#9bc58e" opacity=".4"/></svg>`}
+function headerTitle(k,t,p){return `<div class="map-heading"><div><div class="kicker">${k}</div><h1 style="font-size:clamp(31px,4vw,43px);margin:0 0 9px;color:var(--deep)">${t}</h1><p class="map-sub">${p}</p></div><div class="owl-small" aria-hidden="true">${owlSvg()}</div></div>`}
+function renderHome(){return `<section class="hero"><div class="hero-copy"><span class="eyebrow">🌟 Dein Abenteuer beginnt</span><h1>Die drei Geheimnisse des Waldes</h1><p>Professor Feder braucht deine Hilfe! Finde spannende Tiergeheimnisse, entdecke Beweise im Text und sammle drei Forschungsabzeichen.</p><button class="btn" data-action="start">🔎 ${saved.started?"Zur Forschungskarte":"Forschung starten"} <span aria-hidden="true">➜</span></button></div><div class="hero-scene">${forestScene()}<div class="speech">Huhu! Forschst du mit? 💚</div><div class="owl-frame">${owlSvg()}</div></div></section>
+<section class="section centered"><div class="kicker">So funktioniert das Leselabor</div><h2>Drei Stationen. Ein großes Geheimnis.</h2><p class="section-intro">Hier geht es nicht darum, schnell zu sein. Lies in deinem Tempo und verwende deine Leselupe!</p><div class="three-grid"><div class="feature"><span class="feature-icon">📖</span><strong>1. Lies die Texte</strong><p>Lerne drei heimische Waldtiere kennen und entdecke wichtige Informationen.</p></div><div class="feature"><span class="feature-icon">🔎</span><strong>2. Löse die Rätsel</strong><p>Beantworte Fragen, markiere Beweise und hole dir bei Bedarf Tipps.</p></div><div class="feature"><span class="feature-icon">🏅</span><strong>3. Sammle Abzeichen</strong><p>Erkunde alle Stationen und erhalte dein eigenes Forschungsdiplom.</p></div></div></section>`}
+function renderMap(){return `${headerTitle("Deine Forschungskarte","Willkommen im Waldlabor!","Wähle die nächste Station aus. Mit jeder abgeschlossenen Forschung schaltest du eine weitere Station frei.")}<div class="map-line" role="progressbar" aria-label="Fortschritt der Forschungsaufgaben" aria-valuemin="0" aria-valuemax="9" aria-valuenow="${solvedCount()}"><div class="map-line-fill" style="width:${solvedCount()/9*100}%"></div></div><div class="station-grid">${STATIONS.map((s,i)=>{let done=stationDone(i),unlocked=isUnlocked(i);return `<article class="station-card ${!unlocked?"locked":done?"done":""}"><div class="card-art art-${s.id}"><span class="card-emoji" aria-hidden="true">${s.id==="squirrel"?"🐿️":s.id==="fox"?"🦊":"🦔"}</span><span class="card-state">${done?"✓ Geschafft":!unlocked?"🔒 Gesperrt":"🌟 Offen"}</span></div><div class="card-copy"><span class="category">Forschungsstation ${s.number}</span><h3>${s.title}</h3><p>${s.description}</p><button class="btn ${done?"secondary":"primary-green"}" data-action="station" data-station="${i}" ${unlocked?"":"disabled"}>${!unlocked?"Noch gesperrt":done?"Bericht ansehen":"Station betreten"}</button></div></article>`}).join("")}</div><div class="section"><h3>Deine Forschungsabzeichen</h3><div class="badge-row">${STATIONS.map((s,i)=>`<span class="badge-pill ${stationDone(i)?"earned":""}">${stationDone(i)?s.badge:"🔒 Abzeichen "+(i+1)}</span>`).join("")}</div></div>${allDone()?`<div style="margin-top:25px"><button class="btn" data-action="final">🏆 Mein Forschungsdiplom öffnen</button></div>`:""}`}
+function renderText(reportId,marking){let report=REPORTS[reportId];return `<div class="reading-text">${report.paragraphs.map(p=>`<p>${p.map(s=>marking?`<button type="button" class="mark-sentence" data-sentence="${s.id}" aria-pressed="${markedSentence===s.id}" title="Diesen Satz als Textbeleg auswählen">${esc(s.text)}</button>`:`<span>${esc(s.text)}</span>`).join(" ")}</p>`).join("")}</div>`}
+function renderOptions(q){return `<div class="option-list" role="group" aria-label="Antwortmöglichkeiten">${q.options.map(([id,label])=>`<button type="button" class="option" data-choice="${id}" aria-pressed="${answers.includes(id)}"><span class="option-indicator" aria-hidden="true">${answers.includes(id)?"✓":esc(id.toUpperCase())}</span><span>${esc(label)}</span></button>`).join("")}</div><p class="question-note">${q.kind==="multi"?"Wähle genau zwei Antworten aus.":"Wähle eine Antwort aus."}</p>`}
+function renderMatching(q){return `<div class="matching">${q.descriptions.map((d,i)=>`<div class="match"><label for="match-${i}">${String.fromCharCode(65+i)}: ${esc(d)}</label><select id="match-${i}" data-match="${i}"><option value="">Tier auswählen …</option>${["igel","squirrel","fox"].map(id=>`<option value="${id}" ${matching[i]===id?"selected":""}>${REPORTS[id].name}</option>`).join("")}</select></div>`).join("")}</div><p class="question-note">Ordne jeder Beschreibung ein Tier zu. Jedes Tier wird genau einmal verwendet.</p>`}
+function feedbackHtml(){if(!feedback)return "";return `<div class="feedback ${feedback.ok?"success":""}" role="status"><strong>${feedback.ok?"🎉 Sehr gut geforscht!":"🔍 Noch nicht ganz!"}</strong><span>${esc(feedback.message)}</span></div>`}
+function hintHtml(q){let n=Math.min(3,Math.max(0,Number(saved.hints[q.id])||0));return `<div class="hints"><div class="hints-head"><strong>💡 Die Tippkiste</strong><span>${n} von 3 Tipps</span></div>${q.hints.slice(0,n).map((t,i)=>`<div class="hint"><strong>Tipp ${i+1}:</strong> ${esc(t)}</div>`).join("")}<button class="btn small secondary" data-action="hint" ${n>=3?"disabled":""}>${n===3?"Alle Tipps geöffnet":"💡 Nächsten Tipp ansehen"}</button></div>`}
+function canCheck(q){if(feedback&&feedback.ok)return false;if(q.kind==="mark")return !!markedSentence;if(q.kind==="matching")return matching.every(Boolean);return answers.length===(q.kind==="multi"?2:1)}
+function renderStation(){let s=STATIONS[currentStation],q=shownQuestion(s);if(!q){return `<div class="playbar"><button class="btn secondary small" data-action="map">← Zur Forschungskarte</button><span class="crumb">Station ${s.number} abgeschlossen</span></div><div class="station-finished"><span class="finished-emoji">${s.id==="igel"?"🦔":s.id==="squirrel"?"🐿️":"🦊"}</span><div class="kicker">Forschung abgeschlossen</div><h2>Du hast diese Station geschafft!</h2><p>Dein Abzeichen: <strong>${s.badge}</strong></p><p>Du hast alle drei Fragen dieser Station richtig gelöst.</p><div class="finished-actions"><button class="btn secondary" data-action="map">Zur Forschungskarte</button><button class="btn primary-green" data-action="review">Forschungsbericht lesen</button>${allDone()?`<button class="btn" data-action="final">Zum Diplom 🏆</button>`:""}</div></div>`}
+if(q.kind!=="matching")activeReport=s.id;
+let canProceed=canCheck(q);return `<div class="playbar"><button class="btn secondary small" data-action="map">← Forschungskarte</button><span class="crumb">Station ${s.number} · Aufgabe ${s.questions.indexOf(q)+1} von 3</span></div><div class="playhead"><div><div class="kicker">Forschungsstation ${s.number}</div><h2>${s.title}</h2><p>${s.subtitle}</p></div><span class="playhead-animal" aria-hidden="true">${REPORTS[s.id].emoji}</span></div><div class="play-grid"><section class="paper" aria-label="Forschungsbericht"><div class="paper-top"><strong>📖 Forschungsbericht</strong><span class="paper-label">Leselupe bereit</span></div>${q.kind==="matching"?`<p class="question-note">Du darfst alle drei Berichte lesen.</p><div class="tabs" role="tablist" aria-label="Forschungsbericht auswählen">${Object.entries(REPORTS).map(([id,r])=>`<button class="tab" role="tab" aria-selected="${activeReport===id}" data-report="${id}">${r.emoji} ${r.name}</button>`).join("")}</div>`:""}<h3>${REPORTS[activeReport].title}</h3>${q.kind==="mark"?`<div class="mark-note">👆 Klicke auf einen Satz, um ihn zu markieren.</div>`:""}${renderText(activeReport,q.kind==="mark")}</section><section class="question-card" aria-label="Forschungsaufgabe"><div class="qcount">🔎 Aufgabe ${s.questions.indexOf(q)+1} von 3</div><h3 class="question-title">${q.title}</h3>${q.context?`<div class="question-context">${esc(q.context)}</div>`:""}${q.instruction?`<p class="question-help">${esc(q.instruction)}</p>`:""}${q.kind==="mark"?`<p class="question-note">${markedSentence?"Ein Satz wurde markiert. Prüfe, ob es der richtige Beweis ist.":"Wähle einen Satz im Forschungsbericht aus."}</p>`:q.kind==="matching"?renderMatching(q):renderOptions(q)}${feedbackHtml()}${feedback?.ok?`<div class="answer-actions"><button class="btn primary-green" data-action="next">${allDone()?"Diplom öffnen 🏆":s.questions.indexOf(q)===2?"Abzeichen ansehen 🏅":"Nächste Aufgabe ➜"}</button></div>`:`<div class="answer-actions"><button class="btn primary-green" data-action="check" ${canProceed?"":"disabled"}>Antwort prüfen ✓</button></div>`}${hintHtml(q)}</section></div>`}
+function renderCertificate(){let date=new Intl.DateTimeFormat("de-AT",{day:"numeric",month:"long",year:"numeric"}).format(new Date());return `<section class="certificate-hero"><div style="font-size:65px" aria-hidden="true">🏆</div><h1>Du hast es geschafft!</h1><p>Professor Feder ist stolz auf dich. Alle drei Geheimnisse des Waldes sind gelüftet!</p></section><section class="certificate" id="diplom"><div class="icon" aria-hidden="true">🦉📖</div><div class="kicker">Das Leselabor</div><h2>Forschungsdiplom</h2><div class="subtitle">Die drei Geheimnisse des Waldes</div><p>Herzlichen Glückwunsch! Du hast alle neun Forschungsaufgaben gelöst. Du kannst Informationen in Sachtexten finden, passende Beweise entdecken und Wissen aus mehreren Texten verbinden.</p><div class="certificate-medals"><span>🔎 Igel-Lupe</span><span>🪶 Beweis-Feder</span><span>🧭 Wald-Kompass</span></div><p><strong>Du bist ein echter Leseforschungsprofi!</strong></p><p class="certificate-small">Ausgestellt am ${date} · Professor Feder 🦉</p></section><div class="final-actions"><button class="btn" data-action="print">🖨️ Diplom drucken</button><button class="btn secondary" data-action="map">📚 Meine Forschung ansehen</button><button class="btn secondary" data-action="restart">↻ Neues Abenteuer starten</button></div>`}
+function teacherFooter(){return `<details class="teacher"><summary>Für Lehrpersonen: Kompetenzziel und Quellen</summary><p><strong>Zielgruppe:</strong> 3. Schulstufe. <strong>Hauptkompetenz:</strong> Informationen aus altersgerechten Sachtexten entnehmen. Station 2 übt das Erkennen von Textbelegen, Station 3 das Verknüpfen von Informationen. Geeignet für Einzelarbeit oder Partnerarbeit. Bearbeitungszeit ungefähr 15 bis 20 Minuten.</p><p><strong>Hinweise:</strong> Die Hinweise sind gestuft. Es gibt keine Zeitbegrenzung und keine Strafpunkte. Der Spielfortschritt bleibt nur in der aktuellen Browser-Sitzung gespeichert und wird nicht an einen Server übertragen.</p><p><strong>Tierfakten:</strong> <a href="https://www.umweltberatung.at/igel" target="_blank" rel="noopener noreferrer">DIE UMWELTBERATUNG: Igel</a>, <a href="https://www.deutschewildtierstiftung.de/wildtiere/eichhoernchen" target="_blank" rel="noopener noreferrer">Deutsche Wildtier Stiftung: Eichhörnchen</a>, <a href="https://www.deutschewildtierstiftung.de/wildtiere/fuchs" target="_blank" rel="noopener noreferrer">Deutsche Wildtier Stiftung: Rotfuchs</a>. Die Sachtexte wurden für dieses Lernspiel eigenständig und altersgerecht formuliert.</p></details>`}
+function render({focus=null,scroll=false}={}){showProgress();let content=view==="home"?renderHome():view==="map"?renderMap():view==="station"?renderStation():renderCertificate();app.innerHTML=content+teacherFooter();if(scroll)window.scrollTo({top:0,behavior:"instant"});if(focus){const el=app.querySelector(focus);if(el)el.focus({preventScroll:true})}}
+function changeView(v){view=v;feedback=null;activeQuestionId=null;answers=[];markedSentence="";matching=["","",""];render({scroll:true});document.getElementById("hauptinhalt").focus({preventScroll:true})}
+function reset(){if(!window.confirm("Möchtest du wirklich neu beginnen? Deine Forschungsabzeichen werden zurückgesetzt."))return;saved={started:false,solved:[],hints:{}};persist();changeView("home");announce("Ein neues Abenteuer kann beginnen.")}
+function announce(msg){announcer.textContent="";requestAnimationFrame(()=>announcer.textContent=msg)}
+function checkAnswer(){let s=STATIONS[currentStation],q=nextQuestion(s);if(!q||!canCheck(q))return;let correct=q.kind==="mark"?markedSentence===q.correctSentence:q.kind==="matching"?matching.every((x,i)=>x===q.correct[i]):q.correct.length===answers.length&&q.correct.every(x=>answers.includes(x));if(correct){if(!saved.solved.includes(q.id))saved.solved.push(q.id);persist();activeQuestionId=q.id;feedback={ok:true,message:q.success};announce("Richtig! "+q.success)}else{feedback={ok:false,message:q.kind==="mark"?"Dieser Satz ist noch nicht der gesuchte Beweis. Lies die Aussage noch einmal und suche erneut im Bericht.":q.kind==="matching"?"Eine oder mehrere Zuordnungen stimmen noch nicht. Vergleiche die drei Texte noch einmal.":"Lies die Frage und den Bericht erneut. Du kannst dir auch einen Tipp ansehen."};announce("Noch nicht ganz. "+feedback.message)}render()}
+function openStation(index){if(!isUnlocked(index))return;currentStation=index;activeReport=STATIONS[index].id;changeView("station")}
+app.addEventListener("click",function(event){const button=event.target.closest("button");if(!button||button.disabled)return;let action=button.dataset.action;
+if(action==="start"){saved.started=true;persist();changeView("map");return}
+if(action==="map"){changeView("map");return}
+if(action==="home"){changeView("home");return}
+if(action==="final"){if(allDone())changeView("final");return}
+if(action==="station"){openStation(Number(button.dataset.station));return}
+if(action==="check"){checkAnswer();return}
+if(action==="next"){let s=STATIONS[currentStation];if(!feedback?.ok)return;if(allDone()){changeView("final")}else if(stationDone(currentStation)){changeView("map");announce("Du hast ein Forschungsabzeichen erhalten!")}else{answers=[];markedSentence="";matching=["","",""];feedback=null;activeQuestionId=null;render({scroll:true})}return}
+if(action==="hint"){let q=shownQuestion(STATIONS[currentStation]);if(!q)return;saved.hints[q.id]=Math.min(3,(Number(saved.hints[q.id])||0)+1);persist();render({focus:'[data-action="hint"]'});announce(`Tipp ${saved.hints[q.id]} wurde geöffnet.`);return}
+if(action==="print"){window.print();return}
+if(action==="restart"){reset();return}
+if(action==="review"){let s=STATIONS[currentStation];app.innerHTML=`<div class="playbar"><button class="btn secondary small" data-action="station" data-station="${currentStation}">← Zur Station</button></div><section class="paper" style="max-width:760px;margin:0 auto"><h2>📖 ${REPORTS[s.id].title}</h2>${renderText(s.id,false)}</section>`+teacherFooter();window.scrollTo({top:0,behavior:"instant"});return}
+if(button.dataset.choice){const id=button.dataset.choice,q=nextQuestion(STATIONS[currentStation]);if(!q||feedback?.ok)return;answers=q.kind==="multi"?(answers.includes(id)?answers.filter(x=>x!==id):answers.length<2?[...answers,id]:[answers[1],id]):[id];feedback=null;render({focus:`[data-choice="${id}"]`});return}
+if(button.dataset.sentence){const s=button.dataset.sentence,q=nextQuestion(STATIONS[currentStation]);if(!q||q.kind!=="mark"||feedback?.ok)return;markedSentence=s;feedback=null;render({focus:`[data-sentence="${s}"]`});return}
+if(button.dataset.report){activeReport=button.dataset.report;render({focus:`[data-report="${activeReport}"]`});return}
+});
+app.addEventListener("change",function(e){const sel=e.target.closest("select[data-match]");if(!sel||feedback?.ok)return;const i=Number(sel.dataset.match);matching[i]=sel.value;feedback=null;render({focus:`[data-match="${i}"]`})});
+document.getElementById("home-button").addEventListener("click",()=>changeView("home"));
+render();
+})();
+</script>
+</body>
+</html>
