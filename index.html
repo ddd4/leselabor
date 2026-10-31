@@ -124,6 +124,19 @@
     .teacher{margin-top:34px;background:#fffdf5;border:1px solid #e3e9da;padding:15px 19px;border-radius:17px;color:#486255;font-size:14px}
     .teacher summary{cursor:pointer;font-weight:900}.teacher a{color:var(--forest)}
     footer{padding:20px 0 36px;text-align:center;color:#6f8171;font-size:13px}
+    /* Gut auffindbare Rechtshinweise ohne zusätzlichen Seitenwechsel */
+    .legal-footer{max-width:1180px;padding-top:24px;padding-bottom:42px;text-align:left}
+    .legal-intro{text-align:center;margin-bottom:15px}
+    .legal-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:10px 0 18px}
+    .legal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .legal-box{border:1px solid #d6e3d6;border-radius:16px;background:var(--paper);padding:14px 16px;color:var(--ink);font-size:14px;align-self:start}
+    .legal-box summary{font-size:15px;font-weight:800;color:var(--forest);cursor:pointer;list-style-position:outside;padding:3px}
+    .legal-box[open] summary{margin-bottom:13px}
+    .legal-box p{margin:0 0 11px;line-height:1.6}
+    .legal-box h3{font-size:16px;margin:14px 0 7px;letter-spacing:normal}
+    .legal-box a{color:#145d4c;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+    .legal-box .legal-small{color:#526b60;font-size:13px}
+    @media(max-width:680px){.legal-grid{grid-template-columns:1fr}}
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     @media(max-width:870px){.hero{grid-template-columns:1fr}.hero-copy{padding:36px 28px 10px}.hero-scene{min-height:240px}.owl-frame{width:170px;margin-bottom:20px}.speech{top:6px;right:15%;font-size:14px}.station-grid{grid-template-columns:1fr}.station-card{display:grid;grid-template-columns:180px 1fr}.card-art{height:100%;min-height:207px}.play-grid{grid-template-columns:1fr}.three-grid{grid-template-columns:1fr}.reading-text{font-size:19px}}
     @media(max-width:570px){body{font-size:16px}.wrap{padding:0 13px}.topbar-inner{min-height:68px}.brand{font-size:18px}.brand-emblem{width:37px;height:37px;font-size:22px}.progress-mini{font-size:12px;padding:7px 9px}.quiet-btn{padding:7px 10px;font-size:13px}.headright{gap:5px}main{padding-top:14px}.hero{border-radius:22px}.hero-copy{padding:27px 22px 10px}.hero-copy p{font-size:17px}.hero-scene{min-height:215px}.speech{right:9%;font-size:12px;padding:9px}.section{margin-top:25px}.station-card{display:flex}.card-art{height:145px;min-height:unset}.card-emoji{font-size:75px}.paper,.question-card{padding:20px 18px;border-radius:19px}.reading-text{font-size:18px;line-height:1.85}.playhead{padding:20px 18px}.playhead-animal{font-size:50px}.question-title{font-size:23px}.btn{width:100%}.playbar .btn{width:auto}.finished-actions .btn,.final-actions .btn{width:100%}.certificate{padding:24px 14px;border-width:8px}.certificate h2{font-size:35px}.certificate .subtitle{font-size:19px}}
@@ -138,7 +151,32 @@
   <div class="headright"><span class="progress-mini" id="header-progress" aria-label="Spielfortschritt">0 von 9 Aufgaben</span><button class="quiet-btn" id="home-button" type="button" data-action="home">⌂ Startseite</button></div>
 </div></header>
 <main id="hauptinhalt" class="wrap" tabindex="-1"><div id="app"></div></main>
-<footer class="wrap">Ein Lernspiel für die 3. Schulstufe · Ohne Anmeldung und Werbung · Lesen macht neugierig 🌱</footer>
+<footer class="wrap legal-footer" aria-label="Informationen zum Lernspiel und rechtliche Hinweise">
+  <div class="legal-intro">Ein Lernspiel für die 3. Schulstufe · Ohne Anmeldung und Werbung · Lesen macht neugierig 🌱</div>
+  <div class="legal-grid">
+    <details class="legal-box" id="offenlegung">
+      <summary>Offenlegung gemäß § 25 Mediengesetz</summary>
+      <p><strong>Medieninhaberin oder Medieninhaber:</strong> David Muncan</p>
+      <p><strong>Wohnort:</strong> Wien, Österreich</p>
+      <p><strong>Zweck und Ausrichtung:</strong> Privates, nichtkommerzielles Lernspiel zur Förderung des sinnentnehmenden Lesens in der dritten Schulstufe. Entwickelt als Studienarbeit im Lehramt Primarstufe. Keine Werbung, kein Verkauf und keine entgeltlichen Angebote.</p>
+      <p class="legal-small">Die Offenlegung beruht auf der Einstufung als kleine, nichtkommerzielle Website. Sollten künftig weitere Inhalte oder geschäftliche Angebote hinzukommen, müssen die Angaben erneut geprüft werden.</p>
+    </details>
+    <details class="legal-box" id="datenschutz">
+      <summary>Datenschutzhinweise</summary>
+      <p><strong>Verantwortliche Person für diese Website:</strong> David Muncan, Wien, Österreich</p>
+      <p><strong>Kontakt für Datenschutzanfragen:</strong> <a href="mailto:muncand1998@gmail.com">muncand1998@gmail.com</a></p>
+      <h3>Was wird verarbeitet?</h3>
+      <p>Das Leselabor selbst verlangt keine Anmeldung, keine Eingabe von Namen und verwendet keine eigenen Werbe- oder Analysewerkzeuge. Die Antworten und der Spielfortschritt werden ausschließlich im <code>sessionStorage</code> des verwendeten Browsers gespeichert. Das hilft dabei, den Fortschritt während der Sitzung beizubehalten. Die Spielstände werden nicht an die Websitebetreiberin oder den Websitebetreiber übermittelt und in der Regel beim Schließen der Browser-Sitzung gelöscht. Die Anwendung setzt selbst keine Cookies.</p>
+      <h3>Hosting über GitHub Pages</h3>
+      <p>Die Website wird über GitHub Pages, einen Dienst von GitHub, Inc., bereitgestellt. Bei jedem Aufruf werden technisch notwendige Verbindungsdaten übertragen. Laut GitHub wird die IP-Adresse der aufrufenden Person zu Sicherheitszwecken protokolliert und gespeichert, auch ohne GitHub-Konto. GitHub kann weitere technische Nutzungsdaten gemäß seiner Datenschutzerklärung verarbeiten. Eine Verarbeitung in den USA ist möglich.</p>
+      <p>Die Bereitstellung einer funktionsfähigen und sicheren Website erfolgt auf Grundlage berechtigter Interessen gemäß Art. 6 Abs. 1 lit. f DSGVO, soweit die DSGVO anwendbar ist. Über die konkreten Aufbewahrungsfristen und Verarbeitungsvorgänge bei GitHub informiert GitHub in seiner <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>. Auf die Hosting-Protokolle besteht von dieser Website aus kein direkter Zugriff.</p>
+      <h3>Externe Links</h3>
+      <p>Die im Bereich für Lehrpersonen genannten externen Fachquellen werden erst aufgerufen, wenn ein entsprechender Link angeklickt wird. Dabei gelten die Datenschutzhinweise der jeweiligen Drittanbieter.</p>
+      <h3>Ihre Rechte</h3>
+      <p>Soweit die DSGVO anwendbar ist, bestehen insbesondere Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Widerspruch. Bei Fragen können Sie sich an die oben angeführte Kontaktadresse wenden. Sie haben außerdem das Recht, Beschwerde bei der <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener noreferrer">österreichischen Datenschutzbehörde</a> einzulegen.</p>
+    </details>
+  </div>
+</footer>
 <div class="sr-only" id="announcer" role="status" aria-live="polite"></div>
 <script>
 (function(){
